@@ -2,7 +2,7 @@
   <section>
     <h2>Counter</h2>
     <h3>Counter: {{ counter }}</h3>
-    <h3>Square: {{ squareConuter }}</h3>
+    <h3 data-test-id="square-info">Square: {{ squareConuter }}</h3>
     <hr />
     <div>
       <button class="btn mr-3" @click="counter++">+1</button>
