@@ -28,9 +28,11 @@ interface Props {
 const props = defineProps<Props>();
 const chatRef = ref<HTMLDivElement | null>(null);
 
-watch(
-  props.messages,
+
+// watch escucha una funcion no funcion si pongo props.messages nada mas
+watch(() => props.messages,
   () => {
+    console.log('se disparo el watch')
     setTimeout(() => {
       console.log('message cambio', props.messages.length);
       console.log('ventana', chatRef.value?.scrollHeight);
@@ -39,7 +41,7 @@ watch(
         top: chatRef.value?.scrollHeight,
         behavior: 'smooth',
       });
-    }, 1000);
+    }, 100);
   },
   { deep: true },
 );

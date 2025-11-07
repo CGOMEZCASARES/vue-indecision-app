@@ -18,6 +18,7 @@ export const useChat = () => {
     if (!text.endsWith('?')) return;
     await sleep(1);
     const { answer, image } = await getMessageResponse();
+    
     messages.value.push({
       id: new Date().getTime(),
       itsMine: false,
@@ -31,7 +32,7 @@ export const useChat = () => {
     // llamada http
     const resp = await fetch('https://yesno.wtf/api');
     const data: YesNoRespose = (await resp.json()) as YesNoRespose;
-
+    console.log(data ,"data:")
     return data;
   };
 

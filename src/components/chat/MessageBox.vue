@@ -47,7 +47,7 @@ const emit = defineEmits<{
 const message = ref('');
 
 const sendMessage = () => {
-  if (message.value == undefined || message.value == '' ) return;
+  if (message.value == undefined || message.value.trim() == '' ) return;
   console.log(message.value);
   emit('sendMessage', message.value);
   message.value = '';
