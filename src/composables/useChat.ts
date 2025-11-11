@@ -6,6 +6,14 @@ import { ref } from 'vue';
 export const useChat = () => {
   const messages = ref<ChatMessage[]>([]);
 
+  const getMessageResponse = async () => {
+    // llamada http
+    const resp = await fetch('https://yesno.wtf/api');
+    const data: YesNoRespose = (await resp.json()) as YesNoRespose;
+    console.log(data, 'data:');
+    return data;
+  };
+
   const onMessage = async (text: string) => {
     if (text.length == 0) return;
 
@@ -16,9 +24,9 @@ export const useChat = () => {
     });
 
     if (!text.endsWith('?')) return;
-    await sleep(1);
+    await sleep(1.5);
     const { answer, image } = await getMessageResponse();
-    
+
     messages.value.push({
       id: new Date().getTime(),
       itsMine: false,
@@ -26,14 +34,6 @@ export const useChat = () => {
       image: image,
     });
     //if (text.charAt(-1) == '?') getMessageResponse();
-  };
-
-  const getMessageResponse = async () => {
-    // llamada http
-    const resp = await fetch('https://yesno.wtf/api');
-    const data: YesNoRespose = (await resp.json()) as YesNoRespose;
-    console.log(data ,"data:")
-    return data;
   };
 
   return { messages, onMessage };
